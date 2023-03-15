@@ -78,8 +78,12 @@ class AuthController extends Controller
 
     public function cerrarSesion()
     {
+        $persona = User::find(Auth::user()->id);
+        $persona->status = false;
+        $persona->save();
         Session::flush();
         Auth::logout();
+
 
         return redirect('/login');
     }
